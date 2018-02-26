@@ -1,0 +1,97 @@
+a1--- ha az olyanok is benen vannak akinek nicns háza
+SELECT house, COUNT(*) 
+FROM `characters` 
+WHERE dead = "" AND organization = ""
+GROUP BY house
+
+house	COUNT(*)	
+	20	
+baratheon	4	
+clegane	1	
+greyjoy	2	
+lannister	4	
+mormont	1	
+stark	5	
+targaryen	2	
+tully	2	
+ 
+a2 -ha csak akinek van háza 
+
+SELECT house, COUNT(*) 
+FROM `characters` 
+WHERE dead = "" AND organization = "" AND house <>""
+GROUP BY house
+
+
+house	COUNT(*)	
+baratheon	4	
+clegane	1	
+greyjoy	2	
+lannister	4	
+mormont	1	
+stark	5	
+targaryen	2	
+tully	2
+--------------------------------------------
+b	
+
+SELECT * 
+FROM `characters` 
+WHERE dead ="" AND bio LIKE "%hero%"
+
+
+id	name	alias	dead	portrait	picture	bio	organization	house	
+41	Barristan Selmy			assets/barristan.png	assets/pictures/barristan_selmy.jpg	Ser Barristan Selmy is a celebrated hero and comma...			
+46	Melisandre			assets/melissandre.png	assets/pictures/melissandre.jpg	Melisandre is a priestess of the god R'hllor,  hai...			
+-------------------------------------------
+c
+
+SELECT * 
+FROM `characters` 
+WHERE organization ="nightwatch" AND dead = "" AND house =""
+
+
+id	name	alias	dead	portrait	picture	bio	organization	house	
+1	Jon Snow			assets/jon.png	assets/pictures/jon_snow.jpg	Jon is the bastard child of Ned Stark of Winterfel...	nightwatch		
+37	Alliser Thorne			assets/thorne.png	assets/pictures/allister_thorne.jpg	Ser Alliser Thorne is a master-at-arms of the Nigh...	nightwatch		
+-------------------------------------------
+d
+
+SELECT name AS Hero, alias AS "Nick Name", house AS "Big House"
+FROM `characters` 
+WHERE dead ="" AND house <> "Lannister" 
+			   AND organization <>"Royalguard" 
+               AND bio NOT LIKE "%Lannister%" 
+               AND bio NOT LIKE "%King’s Landing%"
+
+
+Hero	Nick Name	Big House	
+Jon Snow			
+Arya Stark		stark	
+Sansa Stark		stark	
+Robb Stark		stark	
+Bran Stark		stark	
+Rickon Stark		stark	
+Catelyn Tully		tully	
+Theon Greyjoy		greyjoy	
+Petyr Baelish	littlefinger		
+Varys			
+Daenerys Targaryen		targaryen	
+Jorah Mormont		mormont	
+Viserys Targaryen		targaryen	
+Benjen Stark		stark	
+Aemon Targaryen		targaryen	
+Stannis Baratheon		baratheon	
+Renly Baratheon		baratheon	
+Bronn			
+Hodor			
+Maester Luwin			
+Lysa Tully		tully	
+Illyrio Monpatis			
+Maester Pycelle			
+Samwell Tarly		tarly	
+Sandor Clegane	The Hound	clegane	
+
+
+
+ 

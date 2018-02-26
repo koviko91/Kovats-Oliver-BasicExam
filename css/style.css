@@ -1,0 +1,100 @@
+body {
+    background-image: url(../assets/site/mapblue.jpg);
+    margin: 0;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.main-left {
+    width: 75%;
+    height: 100%;
+    margin-right: -6px;
+    position: relative;
+    display: inline-block;
+}
+
+.main-right {
+    background: #39393a;
+    width: 25%;
+    height: 100vh;
+    display: inline-block;
+    position: absolute;
+    text-align: center;
+    color: white;
+}
+
+.main-left div {
+    display: inline-block;
+    width: 8%;
+    margin: 1% 2%;
+    font-size: 12px;
+    text-align: center;
+}
+
+.main-left img:hover {
+    border-radius: 50px;
+    box-shadow: 5px 5px 50px 5px black;
+    text-shadow: 2px 2px 8px #000;
+    cursor: pointer;
+}
+
+form {
+    position: absolute;
+    bottom: 5%;
+}
+
+h1 {
+    font-size: 40px;
+}
+
+.content span {
+    position: absolute;
+    left: 5%;
+    font-size: 20px;
+}
+
+#logo {
+    position: absolute;
+    right: 5%;
+}
+
+.content p {
+    padding: 20px 5% 0 5%;
+    text-align: justify;
+    font-size: 20px;
+}
+
+.btn {
+    font-size: 30px;
+    width: 40px;
+    background: #39393a;
+    color: white;
+    position: absolute;
+    left: 10%;
+    border-radius: 3px;
+}
+
+.text {
+    height: 32px;
+    font-size: 26px;
+    width: 80%;
+    border-radius: 3px;
+    position: relative;
+    left: 30%;
+    padding-left: 30px;
+}
+
+.fa-search {
+    position: absolute;
+    color: grey;
+    top: 20%;
+    left: 37%;
+    font-size: 24px;
+    z-index: 1;
+}
+
+.kijelolt {
+    border-radius: 50px;
+    box-shadow: 5px 5px 50px 5px #007acc;
+    text-shadow: 2px 2px 8px #000;
+    cursor: pointer;
+}

@@ -1,0 +1,12 @@
+CREATE TABLE characters (
+    id BIGINT AUTO_INCREMENT,
+    name varchar(255) NOT NULL,
+    alias varchar(255),
+    dead varchar (255),
+    portrait varchar (255) NOT NULL,
+    picture varchar (255) NOT NULL,
+    bio text,
+    organization varchar(255),
+    house varchar(255),
+    CONSTRAINT pk_charaters PRIMARY KEY (id)
+);
