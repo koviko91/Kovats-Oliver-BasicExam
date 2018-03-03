@@ -30,11 +30,17 @@ body {
     text-align: center;
 }
 
-.main-left img:hover {
+.main-left img {
     border-radius: 50px;
-    box-shadow: 5px 5px 50px 5px black;
+}
+
+.main-left div:hover {
     text-shadow: 2px 2px 8px #000;
     cursor: pointer;
+    border-radius: 10px;
+    box-shadow: 5px 5px 50px 5px #007acc;
+    background: radial-gradient(#007acc, #D3E3E6);
+    transition: 0.3s linear;
 }
 
 form {
@@ -70,7 +76,14 @@ h1 {
     color: white;
     position: absolute;
     left: 10%;
-    border-radius: 3px;
+    border-radius: 10px;
+    outline: none;
+}
+
+.btn:hover {
+    color: #E74C3C;
+    border-color: #E74C3C;
+    cursor: pointer;
 }
 
 .text {
@@ -81,6 +94,7 @@ h1 {
     position: relative;
     left: 30%;
     padding-left: 30px;
+    outline: none;
 }
 
 .fa-search {
@@ -93,8 +107,8 @@ h1 {
 }
 
 .kijelolt {
-    border-radius: 50px;
+    border-radius: 10px;
     box-shadow: 5px 5px 50px 5px #007acc;
+    background: radial-gradient(#007acc, #D3E3E6);
     text-shadow: 2px 2px 8px #000;
-    cursor: pointer;
 }

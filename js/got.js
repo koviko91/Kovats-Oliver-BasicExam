@@ -22,21 +22,22 @@ function successAjax(xhttp) {
       A userDatas NEM GLOBÁLIS változó, ne is tegyétek ki globálisra. Azaz TILOS!
       Ha valemelyik függvényeteknek kell, akkor paraméterként adjátok át.
     */
-    createDiv(userDatas);
 
-    document.querySelectorAll('.main-left img').forEach(function (e, index, tomb) {
+    userDatas = main.sortByName(userDatas);
+    main.create(userDatas);
+    var selected = 0;
+    document.querySelectorAll('.main-left div').forEach(function (e, index, tomb) {
 
         e.addEventListener('click', function () {
-            for (var i = 0; i < tomb.length; i++) {
-                tomb[i].removeAttribute('class');
-            }
-            rightSide(e, userDatas);
+            tomb[selected].removeAttribute('class');
+            main.right(index, userDatas);
             e.setAttribute('class', 'kijelolt');
+            selected = index;
 
         });
     });
     document.querySelector('.btn').addEventListener('click', function () {
-        searchChar(document.querySelector('.text').value, userDatas);
+        selected = main.search(document.querySelector('.text').value, userDatas, selected);
     });
 }
 
@@ -45,9 +46,55 @@ getData('/json/got.json', successAjax);
 
 // Live servert használd mindig!!!!!
 /* IDE ÍRD A FÜGGVÉNYEKET!!!!!! NE EBBE AZ EGY SORBA HANEM INNEN LEFELÉ! */
-function createDiv(data) {
+let main = (function () {
+    function createDiv(data = []) {
+        var block;
+        for (var i in data) {
+            block = document.createElement('div');
+            block.innerHTML = `<img src="${data[i].portrait}" alt="${data[i].name}"><br>${data[i].name}`;
+            document.querySelector('.main-left').appendChild(block);
+        }
+
+    }
+
+    function rightSide(i, data) {
+        document.querySelector('.content').innerHTML = `<img src="${data[i].picture}" alt="${data[i].name}" width="90%"><br>
+                <span>${data[i].name}</span> <img src="assets/houses/${data[i].house}.png" alt="Nem tartozik egyik házhoz sem" id="logo"><br>
+                <p>${data[i].bio}</p>`;
+    }
+
+    function sortname(data = []) {
+        data = data.filter((item) => item.dead == '' ? true : false);
+        var temp;
+        data.sort((a, b) => a.name < b.name ? -1 : 1);
+        return data;
+    }
+
+    function searchChar(text, data, selected) {
+        var kijelol = document.querySelectorAll('.main-left img');
+        console.log(kijelol[selected]);
+        kijelol[selected].removeAttribute('class');
+        for (var j in data) {
+            if (data[j].name.toLowerCase() == text.toLowerCase()) {
+                main.right(j, data);
+                kijelol[j].setAttribute('class', 'kijelolt');
+                break;
+            }
+            document.querySelector('.content').innerHTML = 'Character not found';
+        }
+        return j;
+    }
+    return {
+        sortByName: sortname,
+        create: createDiv,
+        right: rightSide,
+        search: searchChar
+    }
+})();
+
+/* function createDiv(data) {
     var block;
-    sortByname(data);
+    orderModule.sortByName(data);
     for (var i in data) {
         if (data[i].dead == "") {
             block = document.createElement('div');
@@ -55,10 +102,11 @@ function createDiv(data) {
             document.querySelector('.main-left').appendChild(block);
         }
     }
-}
+} */
 
-function sortByname(data) {
+/* function sortByname(data) {
     var temp;
+
     for (var i = 0; i < data.length - 1; i++) {
         for (var j = i + 1; j < data.length; j++) {
             if (data[i].name > data[j].name) {
@@ -69,44 +117,26 @@ function sortByname(data) {
         }
     }
 
-}
+} */
 
-function rightSide(char, data) {
-    for (var i in data) {
-        if (data[i].name == char.alt) {
-
-            document.querySelector('.content').innerHTML = `<img src="${data[i].picture}" alt="${data[i].name}" width="90%"><br>
+/* function rightSide(i, data) {
+    document.querySelector('.content').innerHTML = `<img src="${data[i].picture}" alt="${data[i].name}" width="90%"><br>
             <span>${data[i].name}</span> <img src="assets/houses/${data[i].house}.png" alt="Nem tartozik egyik házhoz sem" id="logo"><br>
             <p>${data[i].bio}</p>`;
-        }
-    }
+} */
 
-}
+/* function searchChar(text, data, selected) {
 
-function searchChar(text, data) {
-    var char = {
-        alt: ""
-    };
+
     var kijelol = document.querySelectorAll('.main-left img');
-
+    console.log(kijelol[selected]);
+    kijelol[selected].removeAttribute('class');
     for (var j in data) {
-
         if (data[j].name.toLowerCase() == text.toLowerCase()) {
-            char.alt = data[j].name;
-            rightSide(char, data);
+            main.right(j, data);
+            kijelol[j].setAttribute('class', 'kijelolt');
             break;
         }
-
     }
-    for (var i = 0; i < kijelol.length; i++) {
-        kijelol[i].removeAttribute('class');
-        if (kijelol[i].alt == char.alt && char.alt != "") {
-            kijelol[i].setAttribute('class', 'kijelolt');
-        }
-    }
-    if (char.alt == "") {
-        document.querySelector('.content').innerHTML = '<h2>Character not found</h2>';
-    }
-
-
-}
+    return j;
+} */
